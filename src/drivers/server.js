@@ -1,5 +1,5 @@
-const dotenv = require('dotenv')
 const hapi = require('@hapi/hapi')
+const dotenv = require('dotenv')
 
 dotenv.config()
 
@@ -10,7 +10,6 @@ const createServer = async () => {
   })
 
   await server.register([
-    require('./product'),
     {
       plugin: require('hapi-pino'),
       options: {
@@ -18,6 +17,8 @@ const createServer = async () => {
       },
     },
   ])
+
+  await server.register([require('./product')])
 
   return server
 }
