@@ -1,3 +1,5 @@
+const { fetchAllProduct } = require('../controllers/productController')
+
 module.exports = {
   name: 'products',
   register: async (server) => {
@@ -5,9 +7,7 @@ module.exports = {
       {
         method: 'GET',
         path: '/product',
-        handler: (request, h) => {
-          return 'product list'
-        },
+        handler: fetchAllProduct,
       },
       {
         method: 'PATCH',
