@@ -1,0 +1,30 @@
+{
+  "name": "elevenia-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Faris Luthfan R",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/boom": "^9.1.0",
+    "@hapi/good": "^9.0.0",
+    "@hapi/hapi": "^19.1.1",
+    "@types/hapi": "^18.0.3",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "hapi-pino": "^8.0.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.0.2",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "jest": "^25.3.0",
+    "nodemon": "^2.0.3"
+  },
+  "scripts": {
+    "dev": "yarn run nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "jest"
+  }
+}
