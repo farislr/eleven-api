@@ -1,4 +1,4 @@
-const { fetchAllProduct } = require('../controllers/productController')
+const { storeAllProduct, editProduct, deleteProduct } = require('../controllers/productController')
 
 module.exports = {
   name: 'products',
@@ -7,20 +7,22 @@ module.exports = {
       {
         method: 'GET',
         path: '/product',
-        handler: fetchAllProduct,
+        handler: storeAllProduct,
       },
       {
         method: 'PATCH',
         path: '/product/{id}/edit',
-        handler: (request, h) => {
-          return 'edit product'
+        handler: async (request, h) => {
+          const { id } = request.params
+
+          return await editProduct(id, request.payload)
         },
       },
       {
         method: 'DELETE',
         path: '/product/{id}/delete',
-        handler: (request, h) => {
-          return 'delete product'
+        handler: async (request, h) => {
+          return await deleteProduct(request.params.id)
         },
       },
     ])

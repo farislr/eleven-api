@@ -1,3 +1,3 @@
 module.exports = (productEntity, { productRepository }) => {
-  return productRepository.storeAllProduct()
+  return productRepository.storeAllProduct(productEntity)
 }

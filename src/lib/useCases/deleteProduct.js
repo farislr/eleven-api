@@ -1,3 +1,3 @@
 module.exports = (id, { productRepository }) => {
-  return productRepository.deleteProduct()
+  return productRepository.deleteProduct(id)
 }

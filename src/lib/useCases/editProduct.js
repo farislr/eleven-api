@@ -1,3 +1,3 @@
-module.exports = (id, { productRepository }) => {
-  return productRepository.editProduct()
+module.exports = (id, data, { productRepository }) => {
+  return productRepository.editProduct(id, data)
 }

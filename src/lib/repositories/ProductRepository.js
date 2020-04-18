@@ -1,5 +1,9 @@
 module.exports = class {
-  fetchAllProduct() {
+  fetchAllProduct(options) {
+    throw new Error('Method not implemented')
+  }
+
+  fetchProductDetail(id) {
     throw new Error('Method not implemented')
   }
 
@@ -11,7 +15,7 @@ module.exports = class {
     throw new Error('Method not implemented')
   }
 
-  editProduct(id) {
+  editProduct(id, data) {
     throw new Error('Method not implemented')
   }
 }

@@ -1,3 +1,3 @@
-module.exports = ({ productRepository }) => {
-  return productRepository.fetchAllProduct()
+module.exports = (options, { productRequest }) => {
+  return productRequest.fetchAllProduct(options)
 }

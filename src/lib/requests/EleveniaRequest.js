@@ -4,11 +4,9 @@ const ProductRepository = require('../repositories/ProductRepository')
 
 const instance = axios.create({
   baseURL: 'http://api.elevenia.co.id/rest/',
-  timeout: 1000,
   headers: {
     openapikey: process.env.ELEVENIA_API_KEY,
   },
-  responseType: 'document',
 })
 
 module.exports = class extends ProductRepository {
@@ -17,13 +15,29 @@ module.exports = class extends ProductRepository {
     this.instance = instance
   }
 
-  async fetchAllProduct() {
-    try {
-      const { data } = await this.instance.get('cateservice/category')
+  async fetchAllProduct(options) {
+    const { page = 1 } = options
 
-      const products = JSON.parse(xmlParser.toJson(data))['ns2:categorys']['ns2:category'] || []
+    try {
+      const { data } = await this.instance.get(`prodservices/product/listing?page=${page}`)
+
+      const products = JSON.parse(xmlParser.toJson(data)).Products.product || []
 
       return products
+    } catch (e) {
+      console.log(e)
+
+      return e
+    }
+  }
+
+  async fetchProductDetail(id) {
+    try {
+      const { data } = await this.instance.get(`prodservices/product/details/${id}`)
+
+      const product = JSON.parse(xmlParser.toJson(data)).Product
+
+      return product
     } catch (e) {
       console.log(e)
 

@@ -16,4 +16,12 @@ describe('elevenia request', () => {
       expect(data).to.be.an('array')
     })
   })
+
+  describe('get product detail', () => {
+    it('succeed', async () => {
+      const data = await request.fetchProductDetail(28022696)
+
+      expect(data).to.be.an('object')
+    })
+  })
 })
