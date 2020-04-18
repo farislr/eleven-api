@@ -42,6 +42,8 @@ module.exports = {
 
       if (editedProduct[0]) {
         return editedProduct[1][0]
+      } else {
+        return generateResponse(true, editedProduct, 'Error occured')
       }
     } catch (e) {
       return e
@@ -55,9 +57,9 @@ module.exports = {
       if (deletedProduct) {
         const response = generateResponse(false, deletedProduct, 'Delete success', { responseParser })
 
-        console.log(response)
-
         return response
+      } else {
+        return generateResponse(true, deletedProduct, 'ID not found', { responseParser })
       }
     } catch (e) {
       console.log(e)
