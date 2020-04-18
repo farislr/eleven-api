@@ -31,9 +31,9 @@ module.exports = {
       })
     )
 
-    storeAllProduct(products, { productRepository })
+    const result = await storeAllProduct(products, { productRepository })
 
-    return products
+    return result
   },
 
   async editProduct(id, data) {

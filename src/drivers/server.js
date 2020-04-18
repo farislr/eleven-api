@@ -5,8 +5,11 @@ dotenv.config()
 
 const createServer = async () => {
   const server = hapi.Server({
-    port: 3000,
+    port: 3030,
     host: 'localhost',
+    routes: {
+      cors: true,
+    },
   })
 
   await server.register([

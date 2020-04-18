@@ -8,11 +8,7 @@ module.exports = class extends ProductRepository {
   }
 
   async storeAllProduct(productEntity) {
-    const allProduct = await this.model.findAll({ attributes: ['sku'] })
-
-    if (allProduct.length === 0) {
-      return await this.model.bulkCreate(productEntity)
-    }
+    const allProduct = await this.model.findAll()
 
     for (let i = 0; i < allProduct.length; i++) {
       const product = allProduct[i]
@@ -26,7 +22,9 @@ module.exports = class extends ProductRepository {
       }
     }
 
-    return await this.model.bulkCreate(productEntity)
+    await this.model.bulkCreate(productEntity)
+
+    return allProduct
   }
 
   async editProduct(id, data) {
