@@ -11,7 +11,11 @@ describe('elevenia request', () => {
 
   describe('get all product', () => {
     it('succeed', async () => {
-      const data = await request.fetchAllProduct()
+      const options = {
+        page: 1,
+      }
+
+      const data = await request.fetchAllProduct(options)
 
       expect(data).to.be.an('array')
     })

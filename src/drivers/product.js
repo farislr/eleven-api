@@ -7,7 +7,12 @@ module.exports = {
       {
         method: 'GET',
         path: '/product',
-        handler: storeAllProduct,
+        handler: async (request, h) => {
+          const options = {
+            page: request.query.page,
+          }
+          return await storeAllProduct(options)
+        },
       },
       {
         method: 'PATCH',
