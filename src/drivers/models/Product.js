@@ -5,10 +5,6 @@ class Product extends Model {}
 
 Product.init(
   {
-    id: {
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
     name: DataTypes.STRING,
     sku: DataTypes.STRING,
     image: DataTypes.STRING,

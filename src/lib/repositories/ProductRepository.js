@@ -18,4 +18,8 @@ module.exports = class {
   editProduct(id, data) {
     throw new Error('Method not implemented')
   }
+
+  getAllProduct() {
+    throw new Error('Method not implemented')
+  }
 }

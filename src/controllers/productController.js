@@ -1,4 +1,5 @@
 const fetchAllProduct = require('../lib/useCases/fetchAllProduct')
+const getAllProduct = require('../lib/useCases/getAllProduct')
 const storeAllProduct = require('../lib/useCases/storeAllProduct')
 const fetchProductDetail = require('../lib/useCases/fetchProductDetail')
 const editProduct = require('../lib/useCases/editProduct')
@@ -61,6 +62,18 @@ module.exports = {
       } else {
         return generateResponse(true, deletedProduct, 'ID not found', { responseParser })
       }
+    } catch (e) {
+      console.log(e)
+
+      return e
+    }
+  },
+
+  async getAllProduct() {
+    try {
+      const allProduct = await getAllProduct({ productRepository })
+
+      return generateResponse(false, allProduct, 'Success', { responseParser })
     } catch (e) {
       console.log(e)
 

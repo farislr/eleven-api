@@ -8,7 +8,7 @@ module.exports = class extends ProductRepository {
   }
 
   async storeAllProduct(productEntity) {
-    const allProduct = await this.model.findAll()
+    const allProduct = await this.model.findAll({ attributes: ['sku'] })
 
     for (let i = 0; i < allProduct.length; i++) {
       const product = allProduct[i]
@@ -24,7 +24,9 @@ module.exports = class extends ProductRepository {
 
     await this.model.bulkCreate(productEntity)
 
-    return allProduct
+    const updatedProduct = await this.model.findAll({ order: [['createdAt', 'DESC']] })
+
+    return updatedProduct
   }
 
   async editProduct(id, data) {
@@ -37,5 +39,11 @@ module.exports = class extends ProductRepository {
     const deleted = await this.model.destroy({ where: { id } })
 
     return deleted
+  }
+
+  async getAllProduct() {
+    const allProduct = await this.model.findAll({ order: [['createdAt', 'DESC']] })
+
+    return allProduct
   }
 }

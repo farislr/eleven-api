@@ -8,7 +8,9 @@ const createServer = async () => {
     port: 3030,
     host: 'localhost',
     routes: {
-      cors: true,
+      cors: {
+        origin: ['*'],
+      },
     },
   })
 
