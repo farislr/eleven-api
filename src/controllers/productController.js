@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+
 const fetchAllProduct = require('../lib/useCases/fetchAllProduct')
 const getAllProduct = require('../lib/useCases/getAllProduct')
 const getProductById = require('../lib/useCases/getProductById')
@@ -14,6 +17,22 @@ const ResponseParser = require('../lib/helper/responseParser')
 const productRequest = new EleveniaRequest()
 const productRepository = new ProductStorage()
 const responseParser = new ResponseParser()
+
+const handleImageUpload = (file) =>
+  new Promise((resolve, reject) => {
+    const imagePath = path.join(__dirname, '../public/images')
+    const filename = file.hapi.filename
+    const data = file._data
+
+    const uploadPath = `${imagePath}/${filename}`
+
+    fs.writeFile(uploadPath, data, (err) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(filename)
+    })
+  })
 
 module.exports = {
   async storeAllProduct(options) {
@@ -38,14 +57,19 @@ module.exports = {
     return result
   },
 
-  async editProduct(id, data) {
+  async editProduct(id, request) {
     try {
-      const editedProduct = await editProduct(id, data, { productRepository })
+      const filename = await handleImageUpload(request.payload.image)
+      const imageURL = `${request.server.info.uri}/image/${filename}`
+
+      Object.assign(request.payload, { image: imageURL })
+
+      const editedProduct = await editProduct(id, request.payload, { productRepository })
 
       if (editedProduct[0]) {
         return editedProduct[1][0]
       } else {
-        return generateResponse(true, editedProduct, 'Error occured')
+        return generateResponse(true, editedProduct, 'Error occured', { responseParser })
       }
     } catch (e) {
       return e

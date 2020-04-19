@@ -21,9 +21,10 @@ const createServer = async () => {
         prettyPrint: process.env.NODE_ENV !== 'production',
       },
     },
+    require('@hapi/inert'),
   ])
 
-  await server.register([require('./product')])
+  await server.register([require('./product'), require('./image')])
 
   return server
 }

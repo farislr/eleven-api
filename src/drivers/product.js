@@ -17,10 +17,18 @@ module.exports = {
       {
         method: 'PATCH',
         path: '/product/{id}/edit',
+        options: {
+          payload: {
+            multipart: true,
+            output: 'stream',
+          },
+        },
         handler: async (request, h) => {
           const { id } = request.params
 
-          return await editProduct(id, request.payload)
+          return await editProduct(id, request)
+
+          // return request.payload
         },
       },
       {
