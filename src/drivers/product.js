@@ -1,4 +1,4 @@
-const { storeAllProduct, editProduct, deleteProduct, getAllProduct } = require('../controllers/productController')
+const { storeAllProduct, editProduct, deleteProduct, getAllProduct, getProductById } = require('../controllers/productController')
 
 module.exports = {
   name: 'products',
@@ -35,6 +35,13 @@ module.exports = {
         path: '/product',
         handler: async (request, h) => {
           return await getAllProduct()
+        },
+      },
+      {
+        method: 'GET',
+        path: '/product/{id}',
+        handler: async (request, h) => {
+          return await getProductById(request.params.id)
         },
       },
     ])

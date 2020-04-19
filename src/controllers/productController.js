@@ -1,5 +1,6 @@
 const fetchAllProduct = require('../lib/useCases/fetchAllProduct')
 const getAllProduct = require('../lib/useCases/getAllProduct')
+const getProductById = require('../lib/useCases/getProductById')
 const storeAllProduct = require('../lib/useCases/storeAllProduct')
 const fetchProductDetail = require('../lib/useCases/fetchProductDetail')
 const editProduct = require('../lib/useCases/editProduct')
@@ -74,6 +75,18 @@ module.exports = {
       const allProduct = await getAllProduct({ productRepository })
 
       return generateResponse(false, allProduct, 'Success', { responseParser })
+    } catch (e) {
+      console.log(e)
+
+      return e
+    }
+  },
+
+  async getProductById(id) {
+    try {
+      const product = await getProductById(id, { productRepository })
+
+      return generateResponse(false, product, 'Success', { responseParser })
     } catch (e) {
       console.log(e)
 

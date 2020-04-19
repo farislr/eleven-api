@@ -46,4 +46,10 @@ module.exports = class extends ProductRepository {
 
     return allProduct
   }
+
+  async getProductById(id) {
+    const product = await this.model.findByPk(id)
+
+    return product
+  }
 }

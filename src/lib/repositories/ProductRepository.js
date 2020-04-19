@@ -22,4 +22,8 @@ module.exports = class {
   getAllProduct() {
     throw new Error('Method not implemented')
   }
+
+  getProductById() {
+    throw new Error('Method not implemented')
+  }
 }
